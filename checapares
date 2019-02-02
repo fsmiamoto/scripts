@@ -1,13 +1,14 @@
 #!/bin/bash
-# checapares.sh - Procura por linhas iguais em pares de arquivos de texto
+# checapares - Procura por linhas iguais em pares de arquivos de texto
 #
 # Descricão:
-# Verifica se linha por linha um arquivo verificando se existem
-# linhas iguais em outro, imprimindo caso sejam encontrados
-# resultados.
+# Verifica um arquivo checando se existem
+# linhas iguais em outro (Usando grep).
+# Caso sejam encontradas linha iguais, estas são impressas
+# na saída padrão.
 #
 # Modo de uso:
-# checapares.sh arquivo1.txt arquivo2.txt
+# checapares arquivo1.txt arquivo2.txt
 #
 # Saída esperada:
 # 1: match1
