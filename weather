@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# weather - Imprime notificação com o tempo atual
+#
+
+notify-send --icon term -t 2000 "<b>$(curl -s wttr.in/Curitiba?format=3 | head -7 | tail -5)</b>"
+
+
+
+
+

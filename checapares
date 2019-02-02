@@ -1,0 +1,39 @@
+#!/bin/bash
+# checapares.sh - Procura por linhas iguais em pares de arquivos de texto
+#
+# Descricão:
+# Verifica se linha por linha um arquivo verificando se existem
+# linhas iguais em outro, imprimindo caso sejam encontrados
+# resultados.
+#
+# Modo de uso:
+# checapares.sh arquivo1.txt arquivo2.txt
+#
+# Saída esperada:
+# 1: match1
+# 2: match2
+# 3: match3
+
+# Caso sejam passados menos de dois arquivos, 
+# sai do programa com mensagem de erro.
+[ $# -lt 2 ] && echo "Número insuficiente de arquivos!" && exit
+
+# Contador para resultados, comeca em 1 
+i=1
+
+# Lê o conteúdo do arquivo do argumento 2
+while read LINHA
+do
+    # Verifica se o texto da linha está no
+    # arquvo do argumento 1
+    resultado=$(grep -o "$LINHA" "$1")
+
+    # Se o resultado for não nulo
+    if [ -n "$resultado" ]
+    then
+        # Mostra resultado e incrementa contador
+        echo "$i: $resultado"
+        i=$(($i+1))
+    fi
+done < "$2"
+

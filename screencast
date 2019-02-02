@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# screencast - Records monitor 1 or 2 and outputs to a file in MP4 format
+#
+# Example of usage:
+#
+# Record monitor 1 to coolvideo.mp4: screencast 1 coolvideo.mp4
+
+
+# If number of arguments is less than 2
+[ $# -lt 2 ] && echo "Insuficient number of arguments" && exit
+
+# If the monitor chosen is 1
+if [ $1 -eq 1 ] 
+then
+    ffmpeg -f x11grab -r 60 -s 1920x1080 -i :0.0+1440,0 -vcodec libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p $2.mp4
+else
+    ffmpeg -f x11grab -r 60 -s 1440x1080 -i :0.0 -vcodec libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p $2.mp4 
+fi
