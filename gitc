@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# gitc - Short script for stagings everything and commiting
+#
+#
+
+# Stages everything and then commits
+git add -A && git commit -m "$1"
+
+

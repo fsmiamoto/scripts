@@ -9,8 +9,12 @@ if [ -r "$HOME/.dbus/Xdbus" ]; then
       . "$HOME/.dbus/Xdbus"
 fi
 
+# Pega previsão e filtra
+previsao=$(w3m -dump wttr.in/Curitiba?lang=ja | head -7 | tail -5 | sed -E 's/^\s//g')
+
 # Envia notificação
-notify-send --icon term -t 3000 "<b>Tempo Atual:</b>" "<b>$(curl -s wttr.in/Curitiba?format=3 | head -7 | tail -5)</b>"
+notify-send --icon x -t 3000 "$previsao"
+
 
 
 
