@@ -5,19 +5,57 @@
 # Verifica um arquivo checando se existem
 # linhas iguais em outro (Usando grep).
 # Caso sejam encontradas linha iguais, estas são impressas
-# na saída padrão.
+# numeradas, a partir de 1, na saída padrão.
 #
-# Modo de uso:
-# checapares arquivo1.txt arquivo2.txt
-#
-# Saída esperada:
-# 1: match1
-# 2: match2
-# 3: match3
+# Versão 1.0: Adicionado suporte as flags -h e -V
+# Versão 1.1: Verifca se foram passados dois arquivos como argumento
 
-# Caso sejam passados menos de dois arquivos, 
-# sai do programa com mensagem de erro.
-[ $# -lt 2 ] && echo "Número insuficiente de arquivos!" && exit
+# Mensagem para flag -h
+MENSAGEM_AJUDA="
+Uso $(basename $0) [-h | -V ] -  Procura por linhas iguais em pares de arquivos de texto
+
+    -h  Mostra esta tela de ajuda e sai.
+    -V  Mostra a versão do programa e sai.
+
+Descricão:
+Verifica um arquivo checando se existem
+linhas iguais em outro (Usando grep).
+Caso sejam encontradas linha iguais, estas são impressas
+numeradas, a partir de 1, na saída padrão.
+
+Modo de uso:
+checapares arquivo1.txt arquivo2.txt
+
+Exemplo:
+arquivo1.txt  arquivo2.txt
+fulano        zezinho
+ciclano       luisinho
+beltrano      fulano
+
+Saída esperada:
+1: fulano
+"
+
+# Tratamento das opções de linha de comando
+case "$1" in
+    -h | --help)
+        echo "$MENSAGEM_AJUDA"
+        exit 0
+    ;;
+
+    -V | --version)
+        # Imprime nome do programa
+        echo -n "$(basename $0): "
+        # Pega versão do programa diretamente do cabeçalho 
+        grep "^# Versão" $0 | tail -1 | cut -d : -f 1 | sed "s/^# // g"
+        exit 0
+        ;;
+
+    *)
+        # Caso nenhuma flag seja passada, verifica número de argumentos
+        [ $# -lt 2 ] && echo "$(basename $0): Número insuficiente de arquivos!" && exit 1
+        ;;
+esac
 
 # Contador para resultados, comeca em 1 
 i=1

@@ -2,18 +2,21 @@
 #
 # weather - Imprime notificação com o tempo atual
 #
+# Importante: Uma fonte monospace deve ser usada na notificação
+# para que o texto fique formatado corretamente.
 
-# Pega variáves necessária para uso no cron
+
+# Pega variáveis necessárias para uso deste script no CRON
 # Referência: https://unix.stackexchange.com/questions/111188/using-notify-send-with-cron#111190
 if [ -r "$HOME/.dbus/Xdbus" ]; then
       . "$HOME/.dbus/Xdbus"
 fi
 
 # Pega previsão e filtra
-previsao=$(w3m -dump wttr.in/Curitiba?lang=ja | head -7 | tail -5 | sed -E 's/^\s//g')
+PREVISAO=$(w3m -dump wttr.in/Curitiba?lang=ja | head -7 | tail -5 | sed -E 's/^\s//g')
 
 # Envia notificação
-notify-send --icon x -t 3000 "$previsao"
+notify-send --icon x -t 3000 "$PREVISAO"
 
 
 

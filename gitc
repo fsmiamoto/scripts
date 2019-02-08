@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# gitc - Short script for stagings everything and commiting
-#
+# gitc - Short script for staging everything and then
+# commiting.
 #
 
 # Stages everything and then commits
