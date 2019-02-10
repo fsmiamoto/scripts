@@ -9,6 +9,7 @@
 #
 # Versão 1.0: Adicionado suporte as flags -h e -V
 # Versão 1.1: Verifca se foram passados dois arquivos como argumento
+# Versão 1.2: Mudança na lógica para uso de streams
 
 # Mensagem para flag -h
 MENSAGEM_AJUDA="
@@ -57,22 +58,5 @@ case "$1" in
         ;;
 esac
 
-# Contador para resultados, comeca em 1 
-i=1
-
-# Lê o conteúdo do arquivo do argumento 2
-while read LINHA
-do
-    # Verifica se o texto da linha está no
-    # arquvo do argumento 1
-    resultado=$(grep -o "$LINHA" "$1")
-
-    # Se o resultado for não nulo
-    if [ -n "$resultado" ]
-    then
-        # Mostra resultado e incrementa contador
-        echo "$i: $resultado"
-        i=$(($i+1))
-    fi
-done < "$2"
-
+# Remove espaços extras -> Monta comando do grep -> Bash -> Numera linhas
+sed -E "s/\s*$//g" $1 | sed -E "s/.*/grep \"&\" $2/" | bash | cat -n
