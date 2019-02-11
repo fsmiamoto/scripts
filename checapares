@@ -10,13 +10,15 @@
 # Versão 1.0: Adicionado suporte as flags -h e -V
 # Versão 1.1: Verifca se foram passados dois arquivos como argumento
 # Versão 1.2: Mudança na lógica para uso de streams
+# Versão 1.3: Flag para ordenar saída
 
 # Mensagem para flag -h
 MENSAGEM_AJUDA="
 Uso $(basename $0) [-h | -V ] -  Procura por linhas iguais em pares de arquivos de texto
 
-    -h  Mostra esta tela de ajuda e sai.
-    -V  Mostra a versão do programa e sai.
+    -h | --help     Mostra esta tela de ajuda e sai.
+    -V | --version  Mostra a versão do programa e sai.
+    -s | --sort     Ordena saída alfabeticamente
 
 Descricão:
 Verifica um arquivo checando se existem
@@ -37,12 +39,19 @@ Saída esperada:
 1: fulano
 "
 
+ordenar=0 # Deve ordenar a saída?
+
+
 # Tratamento das opções de linha de comando
 case "$1" in
+    -s | --sort)
+        ordenar=1
+        ;;
+
     -h | --help)
         echo "$MENSAGEM_AJUDA"
         exit 0
-    ;;
+        ;;
 
     -V | --version)
         # Imprime nome do programa
@@ -54,9 +63,18 @@ case "$1" in
 
     *)
         # Caso nenhuma flag seja passada, verifica número de argumentos
-        [ $# -lt 2 ] && echo "$(basename $0): Número insuficiente de arquivos!" && exit 1
+        [ $# -lt 1 ] && echo "$(basename $0): Número insuficiente de arquivos!" && exit 1
         ;;
 esac
 
 # Remove espaços extras -> Monta comando do grep -> Bash -> Numera linhas
-sed -E "s/\s*$//g" $1 | sed -E "s/.*/grep \"&\" $2/" | bash | cat -n
+resultado=$(sed -E "s/\s*$//g" $1 | sed -E "s/.*/grep \"&\" $2/" | bash)
+
+# Ordena o resultado ( se desejado )
+if [ "$ordenar" = 1 ] 
+then
+    resultado=$(echo $resultado | sort )
+fi
+
+# Imprime resultado, com linhas numeradas
+echo "$resultado" | cat -n
