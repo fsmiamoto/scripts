@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# dev - Select a folder from Dev directory with fzf
+#
+#
+
+# Selects the folder with fzf
+pasta=$(ls -l Dev/ | grep "^d" | sed -nE "s/^.*[0-9] (.*)$/\1/p" | sed -n "s/^.*$/&\//p" | fzf)
+
+# Opens VS Code
+exec code $(echo "/home/shigueo/Dev/$pasta")
+
+
