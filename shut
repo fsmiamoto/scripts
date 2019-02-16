@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# shut - Script para mostrar opções de Desligar e Reiniciar
+#
+#
+
+# Cores
+bg=$(xrdb -query | grep background | head -1 | cut -f 2)
+fg=$(xrdb -query | grep color2 | head -1 | cut -f 2)
+
+# Opções
+opcoes="Shutdown\nRestart"
+
+# Obtém escolha via dmenu
+escolha=$(echo -e $opcoes | dmenu -i -sb "$fg" -nb "$bg" -p "Choose your destiny: " -fn "Inconsolata Nerd Font-20")
+
+case $escolha in
+    "Shutdown") shutdown now ;;
+    "Restart") reboot ;;
+esac
+    
+
+
+
