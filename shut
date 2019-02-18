@@ -12,7 +12,7 @@ fg=$(xrdb -query | grep color2 | head -1 | cut -f 2)
 opcoes="Shutdown\nRestart"
 
 # Obtém escolha via dmenu
-escolha=$(echo -e $opcoes | dmenu -i -sb "$fg" -nb "$bg" -p "Choose your destiny: " -fn "Inconsolata Nerd Font-20")
+escolha=$(echo -e $opcoes | dmenu -b -i -sb "$fg" -nb "$bg" -p "Choose your destiny: " -fn "Inconsolata Nerd Font-20")
 
 case $escolha in
     "Shutdown") shutdown now ;;

@@ -11,6 +11,7 @@
 # Versão 1.1: Verifca se foram passados dois arquivos como argumento
 # Versão 1.2: Mudança na lógica para uso de streams
 # Versão 1.3: Flag para ordenar saída
+# Versão 1.4: Adicionado suporte a várias flags
 
 # Mensagem para flag -h
 MENSAGEM_AJUDA="
@@ -43,38 +44,42 @@ ordenar=0 # Deve ordenar a saída?
 
 
 # Tratamento das opções de linha de comando
-case "$1" in
-    -s | --sort)
-        ordenar=1
-        ;;
+while test -n "$1"
+do
+    case "$1" in
+        -s | --sort)
+            ordenar=1
+            # Realiza shift apenas se for uma flag
+            shift
+            ;;
 
-    -h | --help)
-        echo "$MENSAGEM_AJUDA"
-        exit 0
-        ;;
+        -h | --help)
+            echo "$MENSAGEM_AJUDA"
+            exit 0
+            ;;
 
-    -V | --version)
-        # Imprime nome do programa
-        echo -n "$(basename $0): "
-        # Pega versão do programa diretamente do cabeçalho 
-        grep "^# Versão" $0 | tail -1 | cut -d : -f 1 | sed "s/^# // g"
-        exit 0
-        ;;
+        -V | --version)
+            # Imprime nome do programa
+            echo -n "$(basename $0): "
+            # Pega versão do programa diretamente do cabeçalho 
+            grep "^# Versão" $0 | tail -1 | cut -d : -f 1 | sed "s/^# // g"
+            exit 0
+            ;;
 
-    *)
-        # Caso nenhuma flag seja passada, verifica número de argumentos
-        [ $# -lt 1 ] && echo "$(basename $0): Número insuficiente de arquivos!" && exit 1
-        ;;
-esac
+        *)
+            # Caso nenhuma flag seja passada, verifica número de argumentos
+            [ $# -lt 1 ] && echo "$(basename $0): Número insuficiente de arquivos!" && exit 1
+            # Quando o argumento não for uma flag, sai do loop
+            break
+            ;;
+    esac
+done
 
 # Remove espaços extras -> Monta comando do grep -> Bash -> Numera linhas
 resultado=$(sed -E "s/\s*$//g" $1 | sed -E "s/.*/grep \"&\" $2/" | bash)
 
 # Ordena o resultado ( se desejado )
-if [ "$ordenar" = 1 ] 
-then
-    resultado=$(echo $resultado | sort )
-fi
+test "$ordenar" = 1 && resultado=$(echo $resultado | sort)
 
 # Imprime resultado, com linhas numeradas
 echo "$resultado" | cat -n
