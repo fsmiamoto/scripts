@@ -2,13 +2,13 @@
 #
 # sync-files - Sincroniza .vimrc e .bashrc entre Desktop e Notebook
 #
-# 
+# github.com/fsmiamoto
 
 # Sync .bashrc
-curl https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.bashrc > $HOME/.bashrc
+curl https://github.com && curl https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.bashrc > $HOME/.bashrc
 
 # Sync .vimrc
-curl https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.vimrc > $HOME/.vimrc
+curl https://github.com && curl https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.vimrc > $HOME/.vimrc
 
-# Syncs .scripts files
+# Sync dos scripts 
 cd $HOME/.scripts && git pull
