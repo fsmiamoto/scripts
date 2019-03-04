@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# spotify-controls - Sends the desired control to Spotify client
+#
+# Use example: 'spotify-controls next' (Goes to next song)
+#
+# Author: F. Miamoto
+
+base_command="dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player"
+
+if [ -n "$1" ] 
+then
+    case "$1" in
+        next)
+            echo "$base_command.Next" | bash
+            ;;
+        prev)
+            echo "$base_command.Previous" | bash
+            ;;
+        play-pause)
+            echo "$base_command.PlayPause" | bash
+            ;;
+    esac
+    exit 0
+else
+    echo "Invalid control!" && exit -1
+fi
