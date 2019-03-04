@@ -22,24 +22,30 @@ fi
 
 
 # Output of spotify_status
-# e.g: ' Artist: Music' or empty if Spotify is now running
+# e.g: ' Artist: Music' or empty if Spotify is not running
 spotify=$(python "$HOME/.config/polybar/polybar-spotify/spotify_status.py")
 
 # If output of spotify_status is not empty...
 if [ -n "$spotify" ] 
 then
-    # Gets Spotify Play or Pause icon
-    symbol=$(echo $spotify | grep -o '^.')
+    # If quiet mode, exit
+    test "$OUTPUT" = 0 && exit 0
 
-    if [ "$symbol" = "▶" ]
+    # Gets Spotify Play or Pause icon
+    icon=$(echo $spotify | grep -o '^.')
+
+    # Print appropriate icon
+    if [ "$icon" = "▶" ]
     then
-        test "$OUTPUT" = 1 && echo ""
-        exit 0 
+       echo ""
     else
-        test "$OUTPUT" = 1 && echo "" 
-        exit 0
+       echo "" 
     fi
+
+    # Exit indicating Spotify is running
+    exit 0 
 else
-    exit -1
+    # Indicates Spotify is not running
+    exit -1 
 fi
 
