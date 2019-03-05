@@ -1,0 +1,51 @@
+#!/bin/bash
+#
+# spotify-controls - Outputs the right icon depending on the current status
+# of Spotify using the polybar-spotify module
+#
+# Author: Francisco Miamoto
+# github.com/fsmiamoto
+
+
+# Determines if any output will be generated
+OUTPUT=1
+
+if [ -n "$1" ]
+then
+    case "$1" in
+        # Quiet mode, useful for conditionals
+        -q | --quiet)
+            OUTPUT=0
+            ;;
+    esac
+fi
+
+
+# Output of spotify_status
+# e.g: ' Artist: Music' or empty if Spotify is not running
+spotify=$(python "$HOME/.config/polybar/polybar-spotify/spotify_status.py")
+
+# If output of spotify_status is not empty...
+if [ -n "$spotify" ] 
+then
+    # If quiet mode, exit
+    test "$OUTPUT" = 0 && exit 0
+
+    # Gets Spotify Play or Pause icon
+    icon=$(echo $spotify | grep -o '^.')
+
+    # Print appropriate icon
+    if [ "$icon" = "▶" ]
+    then
+       echo ""
+    else
+       echo "" 
+    fi
+
+    # Exit indicating Spotify is running
+    exit 0 
+else
+    # Indicates Spotify is not running
+    exit -1 
+fi
+

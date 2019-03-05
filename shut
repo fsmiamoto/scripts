@@ -15,8 +15,8 @@ opcoes="Shutdown\nRestart"
 escolha=$(echo -e $opcoes | dmenu -b -i -sb "$fg" -nb "$bg" -p "Choose your destiny: " -fn "Inconsolata Nerd Font-20")
 
 case $escolha in
-    "Shutdown") shutdown now ;;
-    "Restart") reboot ;;
+    "Shutdown") i3exit shutdown ;;
+    "Restart") i3exit reboot ;;
 esac
     
 
