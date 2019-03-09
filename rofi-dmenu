@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# rofi-dmenu - Simulate dmenu with rofi
+#
+
+# Get the number of lines in the input
+input=$(tee) 
+num_lines=$(echo "$input" | wc -l)
+
+echo "$input" | rofi -dmenu -i -p "$1" -lines "$num_lines" -width 30 -hide-scrollbar -font 'Inconsolata, 18' -theme '~/.cache/wal/colors-rofi-dark.rasi'
