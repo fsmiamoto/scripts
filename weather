@@ -13,7 +13,7 @@ if [ -r "$HOME/.dbus/Xdbus" ]; then
 fi
 
 # Pega previsão e filtra
-PREVISAO=$(w3m -dump wttr.in/Curitiba?lang=ja | head -7 | tail -5 | sed -E 's/^\s//g')
+PREVISAO=$(w3m -dump 'http://wttr.in/Curitiba?lang=ja' | head -7 | tail -5 | sed -E 's/^\s//g')
 
 # Envia notificação
 notify-send --icon x -t 3000 "$PREVISAO"

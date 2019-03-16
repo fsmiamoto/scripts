@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# mem-status - Uses notify-send to show the top 10 most fat processes
+#              and their memory usage
+#
+
+use_notification=0
+
+case "$1" in 
+    -n | --notification)
+        use_notification=1
+        ;;
+    *)
+        ;;
+esac
+
+processes=$(ps axch -o cmd:15,%mem --sort=-%mem | head )
+
+if [ "$use_notification" == "1" ]; then
+    notify-send --icon x -t 3000 "$processes" && exit 0
+else
+    echo "$processes" && exit 0
+fi
+
