@@ -20,7 +20,7 @@
 # If the monitor chosen is 1
 if [ $1 -eq 1 ] 
 then
-    ffmpeg -f x11grab -r 60 -s 1920x1080 -i :0.0+1440,0 -vcodec libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p $2
+    ffmpeg -f alsa -ac 1 -i pulse -f x11grab -r 60 -s 1920x1080 -i :0.0+1440,0 -vcodec libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p $2
 else
     ffmpeg -f x11grab -r 60 -s 1440x1080 -i :0.0 -vcodec libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p $2 
 fi
