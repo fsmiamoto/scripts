@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# mountusb - Gives a prompt to select a USB Drive to mount in the desired location 
+#
+# Author: Francisco Miamoto
+
+mounting_points="/mnt/usb\n/mnt/windows"
+
+selected_drive=$(lsblk | grep "part $" | grep -v "sd[ab]" | sed -E 's/^.{2}//g' | awk '{print $1 " " "("$4")"}' | rofi-dmenu "Which drive to mount?" | awk '{print $1}') && mounting_point=$(echo -e $mounting_points | rofi-dmenu "Select the mounting point")
+
+password=$( echo "Senha" | rofi-dmenu "Password") && echo "$password" | sudo -S mount "/dev/$selected_drive"  "$mounting_point"
+
+
