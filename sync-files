@@ -4,11 +4,23 @@
 #
 # github.com/fsmiamoto
 
-# Sync .bashrc
-curl https://github.com && curl https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.bashrc > $HOME/.bashrc
 
-# Sync .vimrc
-curl https://github.com && curl https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.vimrc > $HOME/.vimrc
+# Checks for internet connection
+wget -q --spider http://google.com
 
-# Sync dos scripts 
-cd $HOME/.scripts && git pull
+# If shell return code is 0
+if [ $? -eq 0 ]; then
+    # Sync .bashrc
+    curl -s https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.bashrc > $HOME/.bashrc && \
+        echo "Updated bashrc"
+
+    # Sync .vimrc
+    curl -s https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.vimrc > $HOME/.vimrc && \
+        echo "Updated vimrc"
+
+    # Sync i3 config
+    curl -s https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.config/i3/config > $HOME/.config/i3/config && cat $HOME/.config/i3/i3-ntbk >> $HOME/.config/i3/config && echo "Updated i3"
+
+    # Sync dos scripts 
+    cd $HOME/.scripts && git pull > /dev/null && echo "Updated scripts"
+fi

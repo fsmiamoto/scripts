@@ -6,8 +6,8 @@
 #
 
 # Parâmetros
-porta=/dev/ttyACM0 # Porta serial utilizada
-placa=arduino:avr:mega # Placa Arduino
+porta=/dev/ttyACM0
+placa=arduino:avr:uno
 
 # Compila e, se não houver erros, faz o upload
 arduino-cli compile --fqbn "$placa" "$1" && arduino-cli upload -p "$porta" --fqbn "$placa" "$1"
