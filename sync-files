@@ -14,6 +14,14 @@ if [ $? -eq 0 ]; then
     curl -s https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.bashrc > $HOME/.bashrc && \
         echo "Updated bashrc"
 
+    # Sync .zshrc
+    curl -s https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.zshrc > $HOME/.zshrc && \
+        echo "Updated zshrc"
+
+    # Sync zsh theme
+    curl -s https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.oh-my-zsh/themes/temaDaora.zsh-theme > $HOME/.oh-my-zsh/themes/temaDaora.zsh-theme
+    echo "Updated zsh theme"
+
     # Sync .vimrc
     curl -s https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.vimrc > $HOME/.vimrc && \
         echo "Updated vimrc"
