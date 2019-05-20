@@ -6,6 +6,9 @@
 # Versão 1.0 - Funcionalidade básica
 # Versão 1.1 - Adicionado flag de parar limpeza do código
 
+mensagem_ajuda="
+$(basename $0) [-h | -v] - Compila e faz upload do sketch 
+"
 # Parâmetros
 porta=/dev/ttyACM0
 placa=arduino:avr:uno
@@ -18,6 +21,10 @@ do
         -p | --prod)
             limparArquivo=1
             shift
+            ;;
+        -h | --help)
+            echo $mensagem_ajuda
+            exit 0
             ;;
         -v | --version)
             echo -n "$(basename $0): "
