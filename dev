@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# dev - List project directories with fzf and opens the selected one
+#
+# F. Miamoto
+
+project_dir="$HOME/Dev"
+editor="code"
+
+selected_project=$(find $project_dir -maxdepth 1 -type d -printf '%f\n' | sed -n '2,$p'| fzf --color=16  --prompt='Choose a project: ')
+
+if [ -n "$selected_project" ]; then
+    exec $editor "$project_dir/$selected_project/"
+fi

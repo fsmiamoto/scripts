@@ -11,11 +11,11 @@ opcoes="Shutdown\nRestart\nSuspend\nLock\nExit"
 escolha=$(echo -e $opcoes | rofi-dmenu "Choose your destiny" )
 
 case $escolha in
-    "Shutdown") i3exit shutdown ;;
-    "Restart") i3exit reboot ;;
-    "Suspend") i3exit suspend;;
-    "Lock") i3exit lock;;
-    "Exit") i3exit logout ;;
+    "Shutdown") systemctl poweroff ;;
+    "Restart") systemctl reboot ;;
+    "Suspend") systemctl suspend;;
+    "Lock") lock;;
+    "Exit") i3-msg exit ;;
 esac
     
 
