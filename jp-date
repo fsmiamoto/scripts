@@ -1,0 +1,5 @@
+#!/bin/sh
+
+LANG=ja_JP.UTF-8
+
+date +"$1"
