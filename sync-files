@@ -26,6 +26,14 @@ if [ $? -eq 0 ]; then
     curl -s https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.vimrc > $HOME/.vimrc && \
         echo "Updated vimrc"
 
+    # Sync coc-settings
+    curl -s https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.config/nvim/coc-settings.json > $HOME/.config/nvim/coc-settings.json && \
+        echo "Updated coc settings"
+
+    # Sync .tmux.conf
+    curl -s https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.tmux.conf > $HOME/.tmux.conf && \
+        echo "Updated tmux conf"
+
     # Sync i3 config
     curl -s https://raw.githubusercontent.com/fsmiamoto/dotfiles/master/.config/i3/config > $HOME/.config/i3/config && cat $HOME/.config/i3/i3-ntbk >> $HOME/.config/i3/config && echo "Updated i3"
 
