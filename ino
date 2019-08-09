@@ -50,6 +50,10 @@ fi
 # Compila e, se não houver erros, faz o upload
 arduino-cli compile --fqbn "$placa" "$name" && arduino-cli upload -p "$porta" --fqbn "$placa" "$name"
 
+# Remove arquivos elf e hex
+rm "$name/"*.elf
+rm "$name/"*.hex
+
 if test "$limparArquivo" = "1"
 then
     cat "$name/backup.ino" > "$name/$name.ino"

@@ -12,6 +12,8 @@
 # Versão 1.2: Mudança na lógica para uso de streams
 # Versão 1.3: Flag para ordenar saída
 # Versão 1.4: Adicionado suporte a várias flags
+# Versão 1.5: Testando
+
 
 # Mensagem para flag -h
 MENSAGEM_AJUDA="
