@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# dev - List project directories with fzf and opens the selected one on tmux / vim
+#
+# Francisco Miamoto
+
+project_dir="$HOME/Dev"
+
+selected_project=$(find $project_dir -maxdepth 1 -type d -printf '%f\n' | sed -n '2,$p'| fzf --color=16  --prompt='Choose a project: ')
+
+if [ -n "$selected_project" ]; then
+    # Substitutes . for - on selected_project
+    session_name=$(echo $selected_project | tr \. - )
+
+    # Checks if session with that name already exists
+    tmux has-session -t "$session_name" > /dev/null
+
+    if [ "$?" -eq "0" ]; then
+        tmux attach-session -t "$session_name"
+    else
+        tmux new-session -s $(echo $selected_project | tr \. -) -c "$project_dir/$selected_project" "ide && $EDITOR ."
+    fi
+fi
+
