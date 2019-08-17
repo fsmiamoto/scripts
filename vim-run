@@ -1,0 +1,7 @@
+#!/bin/sh
+
+tmux select-pane -R
+
+tmux send-keys "run $1" Enter
+
+tmux select-pane -L

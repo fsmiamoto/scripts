@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Gets filename without full path
+filename=$(basename "$1")
+
+# Extracts file extension
+extension="${filename##*.}"
+
+case "$extension" in
+    "go")
+        go run "$1"
+        ;;
+    "js")
+        node "$1"
+        ;;
+    "py")
+        python "$1"
+        ;;
+    "m")
+        octave "$1"
+        ;;
+esac
+
