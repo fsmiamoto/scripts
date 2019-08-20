@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+# run - Executes a file
+#
 
 # Gets filename without full path
 filename=$(basename "$1")
@@ -19,5 +22,7 @@ case "$extension" in
     "m")
         octave "$1"
         ;;
+    *)
+        "$1"
 esac
 
