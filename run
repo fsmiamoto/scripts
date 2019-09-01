@@ -22,6 +22,9 @@ case "$extension" in
     "m")
         octave "$1"
         ;;
+    "vhd")
+        ghdl -a "$1"
+        ;;
     *)
         "$1"
 esac
