@@ -16,7 +16,7 @@ then
     exit 1;
 fi
 
-all_episodes=$(find "$BASE_DIR/$choosen_anime/" -type f -printf '%f\n'| sort)
+all_episodes=$(find "$BASE_DIR/$choosen_anime/" -maxdepth 1 -type f -printf '%f\n'| sort)
 
 choosen_episode=$(echo -e "$all_episodes" | fzf --color=16 --prompt='Choose an episode: ')
 
@@ -35,5 +35,8 @@ episodes=$(echo -e "$all_episodes" |\
 echo -e "$episodes" > /tmp/playlist.txt
 
 # Plays videos on the playlist
-$VIDEO_PLAYER --playlist='/tmp/playlist.txt' & disown;
-exit
+$VIDEO_PLAYER --playlist='/tmp/playlist.txt' 1> /dev/null 2> /dev/null & disown;
+
+echo -e "Playing: $choosen_anime\nお楽しみに！"
+
+exit;
