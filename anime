@@ -31,8 +31,9 @@ episodes=$(echo -e "$all_episodes" |\
            sed -n "/$choosen_episode/,\$p" |\
            sed "s:^.*$:$BASE_DIR/$choosen_anime/&:g")
 
-# FIXME: Play multiple files
-episode=$(echo -e "$episodes" | head -1)
+# Adds episode names with path to a text file
+echo -e "$episodes" > /tmp/playlist.txt
 
-$VIDEO_PLAYER "$episode" & disown;
+# Plays videos on the playlist
+$VIDEO_PLAYER --playlist='/tmp/playlist.txt' & disown;
 exit
