@@ -37,6 +37,6 @@ echo -e "$episodes" > /tmp/playlist.txt
 # Plays videos on the playlist
 $VIDEO_PLAYER --playlist='/tmp/playlist.txt' 1> /dev/null 2> /dev/null & disown;
 
-echo -e "Playing: $choosen_anime\nお楽しみに！"
+echo -e "Playing: $choosen_anime\nお楽しみに！";
 
-exit;
+exit 0;

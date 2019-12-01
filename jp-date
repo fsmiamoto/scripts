@@ -1,5 +1,5 @@
 #!/bin/sh
 
-LC_TIME=ja_JP.UTF-8
+export LC_TIME="ja_JP.UTF-8"
 
 date +"%$1"
