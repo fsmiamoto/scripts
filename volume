@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# Get the current volume level
+#
+# github.com/fsmiamoto
+
+if [[ "$(pulsemixer --get-mute)" == "0" ]]
+then
+    pulsemixer --get-volume | awk '{ msg = $1 "%"; print msg }'
+else
+    echo "muted"
+fi
