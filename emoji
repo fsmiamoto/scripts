@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# emoji - Select an emoji and copy it to the clipboard
+#
+
+EMOJIS="$HOME/.local/share/emoji"
+
+# Exit if there are no emojis :(
+[ ! -f $EMOJIS ] && exit 1;
+
+chosen=$(cat "$EMOJIS" | rofi -dmenu -p "Pick a emoji" -lines 5) 
+
+# If nothing was chosen, exit
+[ "$chosen" = "" ] && exit 0;
+
+# Copy to clipboard only the emoji
+echo "$chosen" | awk '{ print $1 }' | xclip -selection clipboard
+
+notify-send "Copied $chosen to clipboard"
+
+unset chosen EMOJIS
