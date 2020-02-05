@@ -13,9 +13,10 @@ chosen=$(cat "$EMOJIS" | rofi -dmenu -p "Pick a emoji" -lines 5)
 # If nothing was chosen, exit
 [ "$chosen" = "" ] && exit 0;
 
-# Copy to clipboard only the emoji
-echo "$chosen" | awk '{ print $1 }' | xclip -selection clipboard
+# Get only the emoji
+emoji=$(echo "$chosen" | awk '{ print $1 }')
 
-notify-send "Copied $chosen to clipboard"
+echo "$emoji" | xclip -selection clipboard
+notify-send "Copied $emoji to clipboard"
 
-unset chosen EMOJIS
+unset chosen emoji EMOJIS
