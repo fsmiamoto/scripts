@@ -25,6 +25,16 @@ case "$extension" in
     "vhd")
         ghdl -a "$1"
         ;;
+    "c")
+        timestamp=$(date +%s)
+        bin="/tmp/run-$timestamp"
+
+        gcc "$@" -o $bin && $bin
+        
+        # Cleanup
+        rm $bin 2>/dev/null
+        unset bin timestamp
+        ;;
     *)
         "$1"
 esac
