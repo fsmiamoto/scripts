@@ -1,0 +1,4 @@
+#!/bin/sh
+
+top -b -n1 | grep ^%Cpu | awk '{printf("%.1f%\n"), 100-$8}' 
+

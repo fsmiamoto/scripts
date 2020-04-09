@@ -1,0 +1,4 @@
+#!/bin/sh
+
+free -t | grep Mem | awk '{printf("%.1f%\n"), $3/$2*100}'
+
