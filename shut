@@ -15,7 +15,7 @@ case $escolha in
     "Restart") systemctl reboot ;;
     "Suspend") systemctl suspend;;
     "Lock") lock;;
-    "Exit") i3-msg exit ;;
+    "Exit") killall Xorg;;
 esac
     
 

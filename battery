@@ -1,0 +1,26 @@
+#!/bin/sh
+# Get the current status of the battery
+# github.com/fsmiamoto
+
+charging_icon=""
+
+for battery in /sys/class/power_supply/BAT*; do
+    charge="$(cat $battery/capacity)"
+
+    if [ "$charge" -gt "90" ]; then
+        echo -n "  "
+    elif [ "$charge" -gt "75" ]; then
+        echo -n "  "
+    elif [ "$charge" -gt "50" ]; then
+        echo -n "  "
+    elif [ "$charge" -gt "25" ]; then
+        echo -n "  "
+    else
+        echo -n "  "
+    fi
+
+    echo -n "$charge% "
+
+    [ "$(cat $battery/status)" = "Charging" ] && echo "$charging_icon"
+done
+
