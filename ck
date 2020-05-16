@@ -6,7 +6,12 @@
 git rev-parse --is-inside-work-tree > /dev/null 2>&1
 [ "$?" != "0" ] && exit 1;
 
-branch=$(git branch -v | rg -v '\*' | fzf --preview-window=hidden --print-query | tail -1 | awk '{ print $1 }')
+selection=$(git branch -v | rg -v '\*' | fzf --prompt="Checkout: " --preview-window=hidden --print-query)
+
+branch=$(echo "$selection" | tail -1 | awk '{ print $1 }')
+
+# Nothing selected
+[ "$branch" =  "" ] && exit
 
 # Check if branch exists
 git show-branch "$branch" &>/dev/null
@@ -18,5 +23,8 @@ fi
 
 git checkout "$branch"
 unset branch
+
+[ "$1" = "-w" ] && read
+
 exit 0
 
