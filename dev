@@ -9,6 +9,6 @@ selected_project=$(find $PROJECT_DIR -maxdepth 1 -type d -printf '%f\n' | sed -n
 if [ -n "$selected_project" ]; then
     # Substitutes . for - on selected_project
     session_name=$(echo $selected_project | tr \. - )
-    tmux new-session -A -s "$session_name" -c "$project_dir/$selected_project" 
+    tmux new-session -A -s "$session_name" -c "$PROJECT_DIR/$selected_project" 
 fi
 
