@@ -4,7 +4,7 @@
 
 if [[ "$(pulsemixer --get-mute)" == "0" ]]
 then
-    pulsemixer --get-volume | awk '{ msg ="墳 " $1 "%"; print msg }'
+    pulsemixer --get-volume | awk '{ msg ="" $1 "%"; print msg }'
 else
-    echo " ﱝ muted"
+    echo " muted"
 fi
