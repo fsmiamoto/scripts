@@ -1,21 +1,20 @@
 #!/bin/bash
 #
-# shut - Script para mostrar opções de Desligar e Reiniciar
+# shut - Script for power management
+# github.com/fsmiamoto
 #
 #
 
-# Opções
-opcoes="Shutdown\nRestart\nSuspend\nLock\nExit"
+options="シャットダウン\n再起動\nスリップ\nロック\n出る"
 
-# Obtém escolha via dmenu
-escolha=$(echo -e $opcoes | rofi-dmenu "Choose your destiny" )
+chosen=$(echo -e $options | rofi-dmenu "電源" )
 
-case $escolha in
-    "Shutdown") systemctl poweroff ;;
-    "Restart") systemctl reboot ;;
-    "Suspend") systemctl suspend;;
-    "Lock") lock;;
-    "Exit") killall Xorg;;
+case $chosen in
+    "シャットダウン") systemctl poweroff ;;
+    "再起動") systemctl reboot ;;
+    "スリップ") systemctl suspend;;
+    "ロック") lock;;
+    "出る") killall Xorg;;
 esac
     
 
