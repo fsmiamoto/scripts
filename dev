@@ -4,7 +4,7 @@
 #
 # github.com/fsmiamoto
 
-selected_project=$(find $PROJECT_DIR -maxdepth 1 -type d,l -printf '%f\n' | sed -n '2,$p'| fzf -q "$1" --color=16 --select-1 --prompt='Choose a project: ')
+selected_project=$(find $PROJECT_DIR -maxdepth 1 -type d,l -printf '%f\n' | sed -n '2,$p'| fzf -q "$1" --color=16 --select-1 --prompt='Choose a project: ' --preview "tree $PROJECT_DIR/{1}")
 
 if [ -n "$selected_project" ]; then
     # Substitutes . for - on selected_project
