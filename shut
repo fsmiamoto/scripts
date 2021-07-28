@@ -10,8 +10,8 @@ options="シャットダウン\n再起動\nスリップ\nロック\n出る"
 chosen=$(echo -e $options | rofi-dmenu "電源" )
 
 case $chosen in
-    "シャットダウン") systemctl poweroff ;;
-    "再起動") systemctl reboot ;;
+    "シャットダウン") systemctl -i poweroff ;;
+    "再起動") systemctl -i reboot ;;
     "スリップ") systemctl suspend;;
     "ロック") lock;;
     "出る") killall Xorg;;
