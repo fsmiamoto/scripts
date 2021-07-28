@@ -1,0 +1,11 @@
+#!/bin/sh
+
+today=$(date +%Y-%m-%d)
+filename="$today.md"
+
+if ! nb list "$filename" > /dev/null 2>&1; then
+    echo -e "# Notes for $today\n" | nb add "$filename"
+fi
+
+echo -e "\n## $(date +%H:%M)" | nb edit "$filename" > /dev/null
+nb edit "$filename"
