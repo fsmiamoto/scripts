@@ -5,6 +5,8 @@
 
 # Gets filename without full path
 filename=$(basename "$1")
+shift;
+args=$@
 
 # Extracts file extension
 extension="${filename##*.}"
@@ -29,7 +31,8 @@ case "$extension" in
         timestamp=$(date +%s)
         bin="/tmp/run-$timestamp"
 
-        gcc "$@" -o $bin && $bin
+        gcc $filename -o $bin
+        $bin $args
         
         # Cleanup
         rm $bin 2>/dev/null
