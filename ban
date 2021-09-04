@@ -3,6 +3,7 @@
 # runs a command for file changes
 # example: ban ls -l
 
+$@ &
 while true; do
     inotifywait -qqr -e create -e modify -e delete -e move ./ && $@
 done
