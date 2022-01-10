@@ -1,0 +1,5 @@
+#!/bin/sh
+
+TEMP=$(sensors | grep "Core" | awk '{print $3}' | sed 's/[^0-9\.]//g' | awk '{total += $1; count += 1} END { print total/count}')
+
+echo "${TEMP}°C"
