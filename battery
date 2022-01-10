@@ -21,6 +21,7 @@ for battery in /sys/class/power_supply/BAT*; do
 
     echo -n "$charge% "
 
-    [ "$(cat $battery/status)" = "Charging" ] && echo "$charging_icon"
+    [ "$(cat $battery/status)" = "Charging" ] && echo -n "$charging_icon "
 done
+echo ""
 
